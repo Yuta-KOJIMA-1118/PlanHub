@@ -18,11 +18,11 @@ services:
     build: ./frontend
     volumes:
       - ./frontend:/app
-      - /app/node_modules
     ports:
       - "5173:5173"
     stdin_open: true
     tty: true
+    command: npm run dev -- --host
 
   db:
     image: postgres:14
