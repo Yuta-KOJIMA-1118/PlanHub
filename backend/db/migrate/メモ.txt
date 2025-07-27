@@ -1,0 +1,5 @@
+docker-compose exec backend rails db:drop db:create
+docker-compose exec backend rails db:migrate:up VERSION=20250726130430
+docker-compose exec backend rails db:migrate:up VERSION=20250726130438
+docker-compose exec backend rails db:migrate:up VERSION=20250726130445
+docker-compose exec backend rails db:migrate:up VERSION=20250726130459

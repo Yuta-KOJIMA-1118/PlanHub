@@ -1,0 +1,15 @@
+/* src/pages/Calendar.css */
+.calendar-container {
+    padding: 1rem;
+    font-family: sans-serif;
+}
+
+.calendar-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+/* カレンダーの見た目を整えるライブラリ */
+@import '@fullcalendar/common/main.css';
+@import '@fullcalendar/daygrid/main.css';

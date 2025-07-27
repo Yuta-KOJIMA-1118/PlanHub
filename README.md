@@ -1,15 +1,18 @@
-# スケジュール共有アプリ
+# スケジュール共有アプリ TeamCal
 # アプリ概要
 - チーム単位でスケジュールを共有・管理するアプリ
-- 一人ひとりが「繰り返し予定」や「臨時予定」を登録可能
+- 一人ひとりがスケジュールが追加可能
 - 予定ごとに「他のメンバーに公開するかどうか」を設定できる
 - メンバーのスケジュールを閲覧可能
 - 非公開の予定は「予定あり」のみを他のメンバーに表示し、詳細は表示しない
 - スケジュール登録時に、複数のチームメンバーを選択して共有可能
 - 共有されたメンバーのカレンダーにも同じスケジュールが表示される
 - スケジュールは1件のデータで管理され、複数人に割り当てられる
+- スケジュールは，終日設定をもつ．
+- スケジュールは，start_timeとend_timeは同じ日付である必要がある（バグ対策）
 - 各ユーザーは共有された予定に対して自分専用のメモを追加できる（個人ノート）
 - マネージャー機能は導入しない（ロール管理なし）
+- 繰り返し機能は導入しない（簡略化）
 
 # 使用するWeb技術
 - Rails API
@@ -72,14 +75,15 @@
 
 - Schedule
   - id
+  - team_id
   - creator_id（作成者UserのID）
   - title
   - start_time
   - end_time
-  - is_public
-  - is_recurring
-  - recurrence_rule
+  - all_day: boolean
+  - visibility: boolean
   - note（全体共有向けの備考）
+注意 繰り返し機能はなくした
 
 - ScheduleParticipant
   - id
@@ -198,3 +202,20 @@ POST /api/v1/schedules
 - WebSocketはチーム単位で購読（例：TeamChannel_1）
 - エラー時のレスポンスは `{ error: "メッセージ" }` 形式で統一
 - 同一スケジュールは複数人に共有され、1件のデータとして保持
+
+
+# 手を加えたファイルリスト
+backend/app/channels/team_channel.rb
+backend/db/migrate/*
+backend/db/seeds.rb
+backend/app/models/*
+backend/app/api/*
+backend/config/routes.rb
+backend/config/initializers/cors.rb
+
+
+frontend/src/App.tsx
+frontend/src/pages/*
+frontend/src/components/*
+
+

@@ -6,7 +6,7 @@ services:
     volumes:
       - ./backend:/app
     ports:
-      - "3001:3000"
+      - "3000:3000"
     depends_on:
       - db
     env_file:
@@ -23,6 +23,8 @@ services:
     stdin_open: true
     tty: true
     command: npm run dev -- --host
+    env_file:
+      - .env
 
   db:
     image: postgres:14
@@ -31,8 +33,4 @@ services:
       POSTGRES_PASSWORD: password
     ports:
       - "5432:5432"
-    volumes:
-      - db-data:/var/lib/postgresql/data
 
-volumes:
-  db-data:
